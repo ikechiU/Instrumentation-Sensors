@@ -22,7 +22,7 @@ public class SensorsController {
     @Autowired
     SensorsService sensorsService;
 
-    @PostMapping(path = "/add", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public SensorsRest addSensor(@RequestBody SensorsRequest sensorsRequest) {
         SensorsRest returnValue = new SensorsRest();
@@ -49,7 +49,7 @@ public class SensorsController {
         return modelMapper.map(sensorsDto, SensorsRest.class);
     }
 
-    @PutMapping(path = "/{sensorId}/update",
+    @PutMapping(path = "/{sensorId}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public SensorsRest updateSensor(@PathVariable String sensorId, @RequestBody SensorsRequest sensorsRequest) {
