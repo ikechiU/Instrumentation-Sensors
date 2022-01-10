@@ -18,7 +18,7 @@ To build this project, you require:
 
 
 ## Test it out 
-Test this app on https://play.google.com/store/apps/details?id=com.i_africa.shiftcalenderobajana  
+Test this app on https://instrumentation-sensors.herokuapp.com/swagger-ui/index.html  
 
 ## Libraries
 *   [Spring Boot Web](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web)
