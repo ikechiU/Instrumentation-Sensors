@@ -1,4 +1,4 @@
-# Shift Schedule (OCP)
+# Instrumentation Sensors
 
 [![Android Build](https://img.shields.io/badge/Java-Spring%20Boot-orange)](https://spring.io/projects/spring-boot) [![Spring JPA](https://img.shields.io/badge/Spring-JPA-blue)](https://spring.io/projects/spring-data-jpa) [![Model Mapper ](https://img.shields.io/badge/ModelMapper-%20passing-green)](http://modelmapper.org/) [![Postgres](https://img.shields.io/badge/Postgres-%20SQL-blue)](https://www.postgresql.org/) [![Swagger](https://img.shields.io/badge/Swagger-passing-green)](https://swagger.io/)
 
