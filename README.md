@@ -16,9 +16,12 @@ To build this project, you require:
 - IntelliJ IDEA 2021.1.3 or above
 - Maven 4.0.0 or above 
 
-
 ## Test it out 
-Test this app on https://instrumentation-sensors.herokuapp.com  
+- Test this app on https://instrumentation-sensors.herokuapp.com  
+
+## Sample 🌠
+An Android application that uses this REST API
+- [SensorApp](https://github.com/ikechiU/InstrumentationSensors-android)
 
 ## Libraries
 *   [Spring Boot Web](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web)
