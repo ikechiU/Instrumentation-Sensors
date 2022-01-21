@@ -3,6 +3,7 @@ package com.example.sensors.ui.controller;
 import com.example.sensors.exceptions.SensorsServiceException;
 import com.example.sensors.service.SensorsService;
 import com.example.sensors.shared.dto.SensorsDto;
+import com.example.sensors.shared.dto.SensorsDtoExtra;
 import com.example.sensors.ui.model.request.SensorsRequest;
 import com.example.sensors.ui.model.response.*;
 import org.modelmapper.ModelMapper;
@@ -75,6 +76,24 @@ public class SensorsController {
         returnValue = new ModelMapper().map(sensorsDtos, listType);
 
         return returnValue;
+    }
+
+    @GetMapping(path = "/extra", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public SensorsRestExtra getSensorsExtra(@RequestParam(value = "page", defaultValue = "0") int page,
+                                        @RequestParam(value = "limit", defaultValue = "10") int limit) {
+
+        SensorsDtoExtra sensorsDtoExtra = sensorsService.getSensorsExtra(page, limit);
+
+        List<SensorsDto> sensorsDtos = sensorsDtoExtra.getSensorsDtos();
+
+        Type listType = new TypeToken<List<SensorsRest>>() {
+        }.getType();
+
+        List<SensorsRest> sensorsRests = new ModelMapper().map(sensorsDtos, listType);
+
+        int totalPages = sensorsDtoExtra.getTotalPages();
+
+        return  new SensorsRestExtra(sensorsRests, totalPages);
     }
 
     @DeleteMapping(path = "/{sensorId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})

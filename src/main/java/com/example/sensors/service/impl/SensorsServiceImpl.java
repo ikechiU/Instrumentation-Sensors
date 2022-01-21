@@ -6,7 +6,7 @@ import com.example.sensors.io.repository.SensorsRepository;
 import com.example.sensors.service.SensorsService;
 import com.example.sensors.shared.Utils;
 import com.example.sensors.shared.dto.SensorsDto;
-import com.example.sensors.ui.model.response.ErrorMessage;
+import com.example.sensors.shared.dto.SensorsDtoExtra;
 import com.example.sensors.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -17,9 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -86,21 +83,18 @@ public class SensorsServiceImpl implements SensorsService {
 
     @Override
     public List<SensorsDto> getSensors(int page, int limit) {
-        List<SensorsDto> returnValue = new ArrayList<>();
+        Page<SensorsEntity> sensorsPage = getSensorsPage(page, limit);
+        return getSensorsDto(sensorsPage);
+    }
 
-        if (page > 0)
-            page = page - 1;
+    @Override
+    public SensorsDtoExtra getSensorsExtra(int page, int limit) {
+        Page<SensorsEntity> sensorsPage = getSensorsPage(page, limit);
 
-        Pageable pageableRequest = PageRequest.of(page, limit);
-        Page<SensorsEntity> sensorsPage = sensorsRepository.findAll(pageableRequest);
+        List<SensorsDto> sensorsDtos = getSensorsDto(sensorsPage);
+        int totalPages = sensorsPage.getTotalPages();
 
-        List<SensorsEntity> sensors = sensorsPage.getContent();
-
-        Type listType = new TypeToken<List<SensorsDto>>() {
-        }.getType();
-        returnValue = new ModelMapper().map(sensors, listType);
-
-        return returnValue;
+       return new SensorsDtoExtra(sensorsDtos, totalPages);
     }
 
     @Override
@@ -128,5 +122,25 @@ public class SensorsServiceImpl implements SensorsService {
         }
 
         return sensorsEntity;
+    }
+
+    private Page<SensorsEntity> getSensorsPage(int page, int limit) {
+        if (page > 0)
+            page = page - 1;
+
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        return sensorsRepository.findAll(pageableRequest);
+    }
+
+    private List<SensorsDto> getSensorsDto(Page<SensorsEntity> sensorsPage) {
+        List<SensorsDto> returnValue;
+
+        List<SensorsEntity> sensors = sensorsPage.getContent();
+
+        Type listType = new TypeToken<List<SensorsDto>>() {
+        }.getType();
+        returnValue = new ModelMapper().map(sensors, listType);
+
+        return returnValue;
     }
 }
