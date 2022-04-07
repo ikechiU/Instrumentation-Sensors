@@ -2,10 +2,12 @@ package com.example.sensors.ui.model.response;
 
 public enum ErrorMessages {
 
-    RECORD_ALREADY_EXISTS("Record already exists"),
+    TITLE_ALREADY_EXISTS("Title already exists"),
+    DESCRIPTION_ALREADY_EXISTS("Description already exists"),
     MISSING_REQUIRED_FIELD("Missing required field"),
-    NO_RECORD_FOUND("Your query does not match any sensor");
-
+    NO_RECORD_FOUND("Your query does not match any sensor"),
+    NO_IMAGE_FOUND("Image path is empty"),
+    ERROR_UPDATING_SENSOR("Only an admin can update this sensor");
 
     private String errorMessage;
 

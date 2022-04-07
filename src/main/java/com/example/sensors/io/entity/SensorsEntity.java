@@ -27,7 +27,7 @@ public class SensorsEntity implements Serializable {
 
     private String moreInfo;
 
-    @Column(nullable = false, length = 150)
+    @Column(length = 150)
     private String imageUrl;
 
     public Long getId() {
